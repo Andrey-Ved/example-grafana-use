@@ -1,0 +1,52 @@
+version: '3.9'
+
+services:
+  api:
+    image: api
+    build:
+      dockerfile: Dockerfile.api
+      context: .
+    container_name: api
+    env_file:
+      - ./configs/.env
+    restart: unless-stopped
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    networks:
+      - custom
+
+  load:
+    image: load
+    build:
+      dockerfile: Dockerfile.load
+      context: .
+    container_name: load
+    env_file:
+      - ./configs/.env
+    restart: unless-stopped
+    networks:
+      - custom
+
+  prometheus:
+    image: prom/prometheus:v2.42.0
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./configs/prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: unless-stopped
+    networks:
+      - custom
+
+  grafana:
+    image: grafana/grafana:9.3.6
+    container_name: grafana
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    networks:
+      - custom
+
+networks:
+  custom:
+    driver: bridge
