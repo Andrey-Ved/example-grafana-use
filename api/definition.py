@@ -5,7 +5,6 @@ from os import path
 from aioprometheus import Registry
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sys import stdout
-from tempfile import mkdtemp
 
 
 logging.basicConfig(
@@ -28,8 +27,6 @@ env_file = root_path + path.sep + 'configs' + path.sep + '.env'
 class Settings(BaseSettings):
     api_port: int
     http_requests_inflight_max: int
-
-    prometheus_multiproc_dir: str = mkdtemp()
 
     model_config = SettingsConfigDict(
         env_file=env_file,
