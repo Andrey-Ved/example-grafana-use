@@ -9,7 +9,7 @@ Based on the [webinar by Sergey Bukharov](https://www.youtube.com/watch?v=Q_fKb0
   
 * [Python 3.10](https://docs.python.org/3.10/),
 * [FastAPI](https://fastapi.tiangolo.com/), 
-* [Prometheus Python Client](https://prometheus.github.io/client_python/),
+* [aioprometheus](https://aioprometheus.readthedocs.io/en/stable/),
 * [Prometheus](https://prometheus.io/), 
 * [Grafana](https://grafana.com/), 
 * [docker](https://docs.docker.com/)
