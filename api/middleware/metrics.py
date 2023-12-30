@@ -23,17 +23,17 @@ class HTTPMetric(BaseHTTPMiddleware):
             'http_requests_total',
             '',
             labelnames=["pattern", "method", "status"],
-            registry=registry
+            registry=registry,
         )
         self.http_requests_current = Gauge(
             'http_requests_inflight_current',
             '',
-            registry=registry
+            registry=registry,
         )
         self.http_requests_inflight_max = Gauge(
             'http_requests_inflight_max',
             '',
-            registry=registry
+            registry=registry,
         )
 
         self.http_requests_inflight_max.set(requests_inflight_max)
@@ -49,7 +49,7 @@ class HTTPMetric(BaseHTTPMiddleware):
             'http_request_duration_seconds_summary',
             '',
             labelnames=["pattern", "method"],
-            registry=registry
+            registry=registry,
         )
 
     async def dispatch(self, request: Request, call_next):
