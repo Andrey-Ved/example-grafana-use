@@ -1,8 +1,8 @@
 import logging
 
 from os import path
-from prometheus_client import CollectorRegistry
-from prometheus_client.multiprocess import MultiProcessCollector
+
+from aioprometheus import Registry
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sys import stdout
 from tempfile import mkdtemp
@@ -40,9 +40,4 @@ class Settings(BaseSettings):
 
 config = Settings()
 
-prometheus_registry = CollectorRegistry()
-
-MultiProcessCollector(
-    prometheus_registry,
-    path=config.prometheus_multiproc_dir
-)
+aioprometheus_registry = Registry()

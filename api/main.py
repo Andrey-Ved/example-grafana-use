@@ -1,9 +1,9 @@
 import uvicorn
 
-from fastapi import FastAPI, Response
-from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
+from aioprometheus import render
+from fastapi import FastAPI, Response, Header
 
-from api.definition import config, prometheus_registry
+from api.definition import config, aioprometheus_registry
 from api.middleware.metrics import HTTPMetric
 from api.middleware.throttling import SimpleThrottling
 from api.router import router
@@ -15,16 +15,22 @@ app.include_router(router)
 
 
 @app.get("/metrics")
-def metrics() -> Response:
+async def handle_metrics(
+    accept: list[str] = Header(None),
+) -> Response:
+    content, http_headers = render(
+        registry=aioprometheus_registry,
+        accepts_headers=accept,
+    )
     return Response(
-        generate_latest(prometheus_registry),
-        media_type=CONTENT_TYPE_LATEST
+        content=content,
+        media_type=http_headers["Content-Type"]
     )
 
 
 app.add_middleware(
     middleware_class=HTTPMetric,
-    registry=prometheus_registry,
+    registry=aioprometheus_registry,  # prometheus_registry,
     requests_inflight_max=config.http_requests_inflight_max,
 )
 
