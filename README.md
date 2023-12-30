@@ -4,7 +4,9 @@ Simple example of api monitoring via Grafana
 
 Based on the [webinar by Sergey Bukharov](https://www.youtube.com/watch?v=Q_fKb0nrfCg)
   
-  
+\
+![screenshot](screenshot.jpg)
+
 ## Used technologies
   
 * [Python 3.10](https://docs.python.org/3.10/),
