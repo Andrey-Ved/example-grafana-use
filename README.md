@@ -22,7 +22,7 @@ Based on the [webinar by Sergey Bukharov](https://www.youtube.com/watch?v=Q_fKb0
 - API documentation - http://127.0.0.1:8000/docs
 - API metrics - http://127.0.0.1:8000/metrics
 - Prometheus is available at - http://127.0.0.1:9090  
-- Grafana - http://127.0.0.1:3000 (admin:admin)   
+- Grafana - http://127.0.0.1:3000   
   
   
 ## Launching in Docker
